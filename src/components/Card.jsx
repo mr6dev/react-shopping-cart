@@ -13,7 +13,7 @@ const Card = (props) => {
         <div className='card-body'>
           <i
             className='bi bi-plus-square fs-5 mb-3 pe-5'
-            type='button'
+            // type='button'
             data-bs-toggle='modal'
             data-bs-target='#exampleModal'
             onClick={props.click}

@@ -1,4 +1,5 @@
 import React from 'react';
+import { Link } from 'react-router-dom';
 
 const Layout = (props) => {
   return (
@@ -6,9 +7,9 @@ const Layout = (props) => {
       <header>
         <nav className='navbar navbar-expand-lg navbar-light bg-light'>
           <div className='container-fluid'>
-            <a className='navbar-brand' href=' '>
-              Navbar
-            </a>
+            <Link className='navbar-brand' to='/'>
+              Home
+            </Link>
             <button
               className='navbar-toggler'
               type='button'
@@ -23,24 +24,9 @@ const Layout = (props) => {
             <div className='collapse navbar-collapse' id='navbarNav'>
               <ul className='navbar-nav'>
                 <li className='nav-item'>
-                  <a className='nav-link active' aria-current='page' href=' '>
-                    Home
-                  </a>
-                </li>
-                <li className='nav-item'>
-                  <a className='nav-link' href=' '>
-                    Features
-                  </a>
-                </li>
-                <li className='nav-item'>
-                  <a className='nav-link' href=' '>
-                    Pricing
-                  </a>
-                </li>
-                <li className='nav-item'>
-                  <a className='nav-link disabled' href=' '>
-                    Disabled
-                  </a>
+                  <Link className='nav-link' to='/Favorites'>
+                    Favorites
+                  </Link>
                 </li>
               </ul>
             </div>
@@ -50,30 +36,30 @@ const Layout = (props) => {
       <main>{props.children}</main>
       <footer className='d-flex flex-wrap justify-content-center align-items-center py-3 mt-4 border-top bg-light'>
         <div className='col-md-4 d-flex align-items-center'>
-          <a
-            href='/'
+          <Link
+            to='/'
             className='mb-3 me-2 mb-md-0 text-muted text-decoration-none lh-1'
           >
             <i className='bi bi-bootstrap'></i>
-          </a>
+          </Link>
           <span className='text-muted'>© 2021 Company, Inc</span>
         </div>
 
         <ul className='nav col-md-4 justify-content-end list-unstyled d-flex'>
           <li className='ms-3'>
-            <a className='text-muted' href=' '>
+            <Link className='text-muted' to=' '>
               <i className='bi bi-twitter'></i>
-            </a>
+            </Link>
           </li>
           <li className='ms-3'>
-            <a className='text-muted' href=' '>
+            <Link className='text-muted' to=' '>
               <i className='bi bi-instagram'></i>
-            </a>
+            </Link>
           </li>
           <li className='ms-3'>
-            <a className='text-muted' href=' '>
+            <Link className='text-muted' to=' '>
               <i className='bi bi-facebook'></i>
-            </a>
+            </Link>
           </li>
         </ul>
       </footer>

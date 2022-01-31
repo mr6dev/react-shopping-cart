@@ -5,7 +5,7 @@ import config from '../config.json';
 import Card from './Card';
 import Modal from './Modal';
 import ListGroup from './ListGroup';
-import WishLists from './WishLists';
+import FavoritesContex from './../context/favoritesContex';
 
 class Cards extends Component {
   state = {
@@ -49,10 +49,6 @@ class Cards extends Component {
       const newLikeWishList = likeWishList.concat(item);
       this.setState({ wishlists: newLikeWishList });
 
-      // window.localStorage.setItem(
-      //   'FavoritLists',
-      //   JSON.stringify(newLikeWishList)
-      // );
       lscache.set('FavoritLists', newLikeWishList, 43200);
     } else if (item.twist === false) {
       const disLikeWishList = [...this.state.wishlists];
@@ -69,36 +65,36 @@ class Cards extends Component {
     const { items, beers, wishlists, oneBeer } = this.state;
 
     return (
-      <div className='container'>
-        <ListGroup items={items} onItemSelect={this.handleSelectFilter} />
-        <div className='row align-items-cente'>
-          {beers.map((beer) => (
-            <Card
-              key={beer.id}
-              img={beer.image_url}
-              title={beer.name}
-              description={beer.tagline}
-              liked={beer.twist}
-              click={() => this.handleModalClcik(beer)}
-              onLike={() => this.handleLike(beer)}
+      <FavoritesContex.Provider value={wishlists}>
+        <div className='container'>
+          <ListGroup items={items} onItemSelect={this.handleSelectFilter} />
+          <div className='row align-items-cente'>
+            {beers.map((beer) => (
+              <Card
+                key={beer.id}
+                img={beer.image_url}
+                title={beer.name}
+                description={beer.tagline}
+                liked={beer.twist}
+                click={() => this.handleModalClcik(beer)}
+                onLike={() => this.handleLike(beer)}
+              />
+            ))}
+          </div>
+
+          {oneBeer.id && (
+            <Modal
+              key={oneBeer.id}
+              img={oneBeer.image_url}
+              name={oneBeer.name}
+              tagline={oneBeer.tagline}
+              abv={oneBeer.abv}
+              description={oneBeer.description}
+              price={oneBeer.srm}
             />
-          ))}
+          )}
         </div>
-
-        {oneBeer.id && (
-          <Modal
-            key={oneBeer.id}
-            img={oneBeer.image_url}
-            name={oneBeer.name}
-            tagline={oneBeer.tagline}
-            abv={oneBeer.abv}
-            description={oneBeer.description}
-            price={oneBeer.srm}
-          />
-        )}
-
-        <WishLists items={wishlists} />
-      </div>
+      </FavoritesContex.Provider>
     );
   }
 }
